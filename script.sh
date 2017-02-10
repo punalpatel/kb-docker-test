@@ -12,7 +12,7 @@ var2=$(git diff --name-only prod...HEAD)
 echo "$var2"
 
 echo "${TRAVIS_PULL_REQUEST}" 
-echo ${TRAVIS_BRANCH}"
+echo "${TRAVIS_BRANCH}"
 
 python script.py 
 
