@@ -125,7 +125,7 @@ def git_diff(branch1, branch2):
     # This should use the class variables
     # d = self.repository.diff('%s..%s' % ('master', 'HEAD'), log_format).split("\n")
     try:
-        differ = repository.diff('%s..%s' % (branch1, branch2), log_format).split("\n")
+        differ = repository.diff('%s..%s' % ('HEAD^'), log_format).split("\n")
         for line in differ:
             if len(line):
                 commits.append(line)
@@ -215,7 +215,7 @@ def main():
 
     # List the files that are different between HEAD..master
     # diff_files = kb_validator.git_diff()
-    diff_files = git_diff('HEAD^')
+    diff_files = git_diff('master', 'HEAD^')
     print diff_files
 
     # Loop through the files
