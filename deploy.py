@@ -215,7 +215,7 @@ def main():
 
     # List the files that are different between HEAD..master
     # diff_files = kb_validator.git_diff()
-    diff_files = git_diff('master', 'HEAD')
+    diff_files = git_diff('HEAD^')
     print diff_files
 
     # Loop through the files
