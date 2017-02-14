@@ -24,6 +24,8 @@ echo "$var3"
 var3=$(git diff --name-only master...HEAD~1)
 echo "$var3"
 
+python src/KBFrontmatter.py ../tests/fixtures/barebones.md
+
 # @TODO Add a local variable for non-travis testing
  if [ "${TRAVIS_PULL_REQUEST}" ] && [ "${TRAVIS_BRANCH}" == "prod" ]; then
 		python deploy.py  	
