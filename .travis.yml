@@ -6,7 +6,7 @@ services:
   - docker
 
 before_install:
-- docker build -t pivotal-gss/kb-docker .
+- docker build --build-arg travis_branch=${TRAVIS_BRANCH} --build-arg travis_pull_request=${TRAVIS_PULL_REQUEST} --build-arg kb_user=${KB_USER} --build-arg kb_password=${KB_PASSWORD} --build-arg kb_target_url=${KB_TARGET_URL} -t pivotal-gss/kb-docker .
 - docker images
 
 script:
