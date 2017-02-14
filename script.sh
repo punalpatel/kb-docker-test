@@ -2,11 +2,7 @@
 
 set -ev
 
-python script.py 
-
-git diff --name-only HEAD^
-
-git diff --name-only master..HEAD
+python script.py
 
 # @TODO Add a local variable for non-travis testing
  if [ "${TRAVIS_PULL_REQUEST}" ] && [ "${TRAVIS_BRANCH}" == "prod" ]; then
