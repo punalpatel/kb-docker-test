@@ -109,7 +109,7 @@ if __name__ == '__main__':
         file_name = str(sys.argv[1])
         if file_name.endswith(('.md', '.markdown')):
             print file_name + ' - is markdown: Processing'
-            kb = KBFrontmatter(file_name)
+            kb = KBFrontmatter()
             kb.validate_markdown()
         else:
             print file_name + ' - is not markdown: Skipping'
