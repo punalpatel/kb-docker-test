@@ -2,10 +2,6 @@
 
 set -ev
 
-var2=$(git diff --name-only HEAD^)
-git diff --name-only HEAD^
-echo "$var2"
-
 python script.py
 
 
