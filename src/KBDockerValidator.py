@@ -20,9 +20,9 @@ class KBDockerValidator():
 
         format = '--name-only'
         commits = []
-        # This should use the class variables
-        d = self.repository.diff('%s..%s' % ('master', 'HEAD^'), format).split("\n")
-
+        # This should use the class variables x
+        d = self.repository.diff('%s..%s' % ('prod', 'HEAD^'), format).split("\n")
+        
         return d
 
     def set_base(self, base='HEAD'):
