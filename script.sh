@@ -4,7 +4,7 @@ set -ev
 
 python script.py 
 
-git diff --name-only prod..HEAD
+git diff --name-only HEAD^
 
 git diff --name-only master..HEAD
 
