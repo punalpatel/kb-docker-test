@@ -2,32 +2,18 @@
 
 set -ev
 
-python script.py
-
-git branch
 echo "${TRAVIS_BRANCH}"
 
-var=$(git diff --name-only HEAD...master)
-echo "$var"
+var=$(git diff --name-only HEAD^...master)
 
-
-var1=$(git diff --name-only HEAD^...master)
-echo "$var1"
-
-var2=$(git diff --name-only master...HEAD^)
-echo "$var2"
-
-var3=$(git diff --name-only master...HEAD)
-echo "$var3"
-
-
-var3=$(git diff --name-only master...HEAD~1)
-echo "$var3"
-
-python src/KBFrontmatter.py ../tests/fixtures/barebones.md
+for filename in $var; do
+	python src/KBFrontmatter.py filename
+	# python script.py filename
+done
 
 # @TODO Add a local variable for non-travis testing
- if [ "${TRAVIS_PULL_REQUEST}" ] && [ "${TRAVIS_BRANCH}" == "prod" ]; then
-		python deploy.py  	
+ if [ "${TRAVIS_PULL_REQUEST}" = "true" ] && [ "$TRAVIS_BRANCH" == "prod" ]; then
+	for filename in $var; do
+		python scripts/deploy.py filename
+	done
  fi
-
