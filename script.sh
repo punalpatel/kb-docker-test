@@ -13,7 +13,7 @@ for filename in $var; do
 done
 
 # @TODO Add a local variable for non-travis testing
- if [ "${TRAVIS_PULL_REQUEST}" = "true" ] && [ "$TRAVIS_BRANCH" == "prod" ]; then
+ if [ "$TRAVIS_BRANCH" == "prod" ]; then
 	for filename in $var; do
 		python deploy.py $filename
 	done
