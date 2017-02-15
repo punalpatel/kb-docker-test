@@ -247,7 +247,30 @@ def main():
     """
     
 if __name__ == "__main__":
-    main()
+
+    if len(sys.argv) > 1:
+        file_name = str(sys.argv[1])
+        print file_name 
+        exit
+        if file_name.endswith(('.md', '.markdown')):
+            print file_name + ' - is markdown: Processing'
+            try:
+                with open(file_name) as c:
+                    metadata, content = frontmatter.parse(c.read())
+            except IOError:
+                # If the diff is a delete or move the file may no longer
+                # exist in the current branch
+                print 'This file does not exist in the current branch - has title'
+                pass
+
+            process_article(metadata, content)
+        else:
+            print file_name + ' - is not markdown: Skipping'
+            
+    else:
+        print 'No file specified. \nExample Command:'
+        print '\n python scripts/frontmatter-test.py article.md'
+        print '*****************************\n'
+        print 'Trying to run - main() as fallback'
 
 
-    # print kb_validator.is_valid
