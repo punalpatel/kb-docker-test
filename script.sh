@@ -8,8 +8,8 @@ var=$(git diff --name-only HEAD^...master)
 echo $var
 
 for filename in $var; do
-	echo filename
-	python src/KBFrontmatter.py filename
+	echo $filename
+	python src/KBFrontmatter.py $filename
 done
 
 # @TODO Add a local variable for non-travis testing
