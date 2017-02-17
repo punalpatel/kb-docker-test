@@ -203,7 +203,7 @@ def process_article(metadata, content):
     # Extract the Article id
     if 'id' in metadata.keys():
         print 'I HAVE AND ID -> process_article()'
-        update_article(metadata, content)
+       # commented out with line 77 update_article(metadata, content)
     else:
         print 'NO ID FOR YOU -> process_article()'
         create_article(metadata, content)
