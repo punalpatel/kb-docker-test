@@ -74,9 +74,8 @@ def update_article(metadata, content):
     """
     print 'Check if article_id exists in the Help Center -> update_article()'
     # Check if the article exists in the helpcenter
-    # Commented because of Build failure#120 hc_article = get_article(metadata['id'])
+    hc_article = get_article(metadata['id'])
     # if the article exists in the helpcenter then updat
-    hc_article = 1
     print "here we are"
     if hc_article:
         print 'Success - An article exists with ID - %d -> update_article()' % metadata['id']
@@ -203,7 +202,7 @@ def process_article(metadata, content):
     # Extract the Article id
     if 'id' in metadata.keys():
         print 'I HAVE AND ID -> process_article()'
-       # commented out with line 77 update_article(metadata, content)
+        update_article(metadata, content)
     else:
         print 'NO ID FOR YOU -> process_article()'
         create_article(metadata, content)
