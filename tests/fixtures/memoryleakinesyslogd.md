@@ -1,3 +1,10 @@
+---
+title: Resolving issues with Diego Windows
+template: how-to
+id: 
+locale: en-us
+---
+
 # Memory Leak in Rsyslogd
 
 **Environment**

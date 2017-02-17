@@ -24,17 +24,18 @@ def get_article(article_id):
     # Check if the article ID exists
     print 'Load an Article -> get_article()'
 
-    # https://developer.zendesk.com/rest_api/docs/help_center/articles#show-article
-    article_url = 'help_center/en-us/articles/%d.json' % (article_id)
-    hc_article = zd_request(article_url)
-
-    # Check if article_id exists in the Help Center
-    if 'id' in hc_article['article'].keys():
-        print 'Success - An article exists with ID - %d -> get_article()' % (hc_article['article']['id'])
-        return hc_article
-    else:
-        print 'Error - Unable find an article with ID - %d' % (article_id)
-        return
+    try:
+        # https://developer.zendesk.com/rest_api/docs/help_center/articles#show-article
+        article_url = 'help_center/en-us/articles/%d.json' % (article_id)
+        hc_article = zd_request(article_url)    # Check if article_id exists in the Help Center
+        if 'id' in hc_article['article'].keys():
+            print 'Success - An article exists with ID - %d -> get_article()' % (hc_article['article']['id'])
+            return hc_article
+        else:
+            print 'Error - Unable find an article with ID - %d' % (article_id)
+            return False
+    except Exception as e:
+        pass
 
 def create_article(metadata, content):
     """
@@ -44,23 +45,23 @@ def create_article(metadata, content):
     Returns:
       article: An instance of a new Help Center Article.
     """
-    create_url = '/api/v2/help_center/en-us/articles.json'
-
+    # POST /api/v2/help_center/sections/{id}/articles.json
+    # POST /api/v2/help_center/{locale}/sections/{id}/articles.json
+    create_url = 'help_center/en-us/sections/202922587/articles.json'
     # Create a new article
     # @TODO define a section
     html = markdown2.markdown(content)
-    data = {'translation':{'body': html, 'title': metadata['title']}}
+    data = {'article':{'body': html, 'title': metadata['title'], 'locale': 'en-us'}}
     new_article = zd_request(create_url, data, 'POST')
-
     # Check if article_id exists in .md
     if new_article:
-        print 'Success - An article was created in the helpcenter ID - XXXX'
+        print 'Success - An article was created in the helpcenter ' 
         print new_article
         # @TODO - update_git_article
         update_git_article(new_article)
     else:
         print 'Error - Unable to create a new article in the helpcenter'
-    
+
     return new_article
 
 
@@ -94,7 +95,7 @@ def update_article(metadata, content):
 
     # @TODO should we create one anyway? Discuss?
     print "Return an instance of the updated_article -> update_article()"
-    return updated_article
+    return hc_article
 
 def update_git_article(article):
     """
@@ -137,7 +138,7 @@ def git_diff(branch1, branch2):
     #    print '*%s' % (commit)
     return commits
 
-def zd_request(u, req_data=None, method='GET', ): 
+def zd_request(u, req_data=None, method='GET', ):
     """
       Args:
       method (str): The first parameter.
@@ -178,6 +179,8 @@ def zd_request(u, req_data=None, method='GET', ):
     if response.status_code != 200:
         print('Status:', response.status_code, 'Problem with the request. Exiting.')
 
+    print response
+
     # Decode the JSON response into a dictionary and use the data
     data = response.json()
 
@@ -196,19 +199,20 @@ def process_article(metadata, content):
     # Load the markdown from the article
     #article = frontmatter.load('tests/fixtures/barebones.md')
     #article = frontmatter.load('tests/article_without_id.md')
-            
+
     #print metadata.content
     # return
     # Extract the Article id
     if 'id' in metadata.keys():
-        print 'I HAVE AND ID -> process_article()'
-        update_article(metadata, content)
-    else:
-        print 'NO ID FOR YOU -> process_article()'
-        create_article(metadata, content)
+        if metadata['id']:
+            print 'I HAVE AND ID -> process_article()'
+            update_article(metadata, content)
+        else:
+            print 'NO ID FOR YOU -> process_article()'
+            create_article(metadata, content)
 
 def main():
-    """  
+    """
     """
     # Validate all the files in commit
     # kb_validator = KBValidator()
@@ -238,19 +242,19 @@ def main():
             process_article(metadata, content)
         else:
             print '---> ' + c + ' - is not markdown: Skipping'
-    
+
     """if markup.is_valid:
         print "\n*************************\n"
         print "Failed: %d errors Detected" % markup.is_valid
         print "\n************************\n"
         exit()
     """
-    
+
 if __name__ == "__main__":
 
     if len(sys.argv) > 1:
         file_name = str(sys.argv[1])
-        print file_name 
+        print file_name
         exit
         if file_name.endswith(('.md', '.markdown')):
             print file_name + ' - is markdown: Processing'
@@ -266,11 +270,9 @@ if __name__ == "__main__":
             process_article(metadata, content)
         else:
             print file_name + ' - is not markdown: Skipping'
-            
+
     else:
         print 'No file specified. \nExample Command:'
         print '\n python scripts/frontmatter-test.py article.md'
         print '*****************************\n'
         print 'Trying to run - main() as fallback'
-
-
