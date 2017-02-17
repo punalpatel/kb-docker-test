@@ -1,5 +1,5 @@
 ---
-title: Resolving issues with Diego Windows
+title: Resolving memory leaks in Rsyslogd
 template: how-to
 id: 
 locale: en-us
