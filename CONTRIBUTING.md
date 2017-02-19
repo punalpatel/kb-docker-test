@@ -1,4 +1,4 @@
-# Contributing at the Pivotal Cloud Foundry Knowledge Base
+# Contributing to the Pivotal Cloud Foundry Knowledge Base
 
 ![Header Image](contributing_header_slack.png)
 
