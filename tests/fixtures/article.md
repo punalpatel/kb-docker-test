@@ -5,4 +5,14 @@ id: 213730187
 locale: en-us
 ---
 
-How are you doing
+##Symptom
+
+The program is failing
+
+##Cause
+
+The installation fails
+
+##Resolution
+
+Contact Support
