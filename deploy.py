@@ -89,7 +89,8 @@ def update_article(metadata, content):
         updated_article = zd_request(update_url, data, 'PUT')
 
         if updated_article:
-            print 'Success - An article was updated with ID - %d' % updated_article['translation']['id']
+            print 'Success - An article was updated with ID'
+            print updated_article
         else:
             print 'Error - Unable to update article'
 
