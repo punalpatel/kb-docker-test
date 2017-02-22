@@ -1,7 +1,7 @@
 ---
 title: Test KB XYZ
 template: how-to
-id: 
+id: 115003222247
 locale: en-us
 ---
 
