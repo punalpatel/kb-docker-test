@@ -126,7 +126,7 @@ def update_git_article(article, file_path):
     subprocess.Popen(git_config_name_command).communicate(input=None)
  
     # Check the status of the changes
-    git_remote_command = ['git', 'remote', 'origin-kbs', 'https://github.com/pivotal-gss/kb-docker.git', '>', '/dev/null', '2>&1']
+    git_remote_command = ['git', 'remote', 'add', 'origin-kbs', 'https://github.com/pivotal-gss/kb-docker.git', '>', '/dev/null', '2>&1']
     subprocess.Popen(git_remote_command).communicate(input=None)
  
     # Check the status of the changes
