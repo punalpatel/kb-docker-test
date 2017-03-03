@@ -1,4 +1,4 @@
-import requests, os, sys
+import requests, os, sys, subprocess
 import frontmatter, git, json, markdown2
 
 # https://gitpython.readthedocs.io/en/stable/tutorial.html#the-commit-object
