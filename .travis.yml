@@ -10,5 +10,6 @@ before_install:
 - docker images
 
 script:
-- docker run -it pivotalsupport/kb-docker
+#- docker run -it pivotalsupport/kb-docker
+- docker run -it -v $PWD:/pcf-kbs -e TRAVIS_BRANCH="prod" -e KB_TARGET_URL=$KB_TARGET_URL -e KB_USER=$KB_USER -e KB_PASSWORD=$KB_PASSWORD  pivotalsupport/kb-docker /bin/sh
 - docker ps -a
