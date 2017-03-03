@@ -288,7 +288,7 @@ if __name__ == "__main__":
                 print 'This file does not exist in the current branch - has title'
                 pass
 
-            process_article(metadata, content)
+            process_article(metadata, content, file_name)
         else:
             print file_name + ' - is not markdown: Skipping'
 
