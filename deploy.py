@@ -37,7 +37,7 @@ def get_article(article_id):
     except Exception as e:
         pass
 
-def create_article(metadata, content):
+def create_article(metadata, content, file_path):
     """
     Args:
       article (article): An instance of a Help Center Article
@@ -58,7 +58,7 @@ def create_article(metadata, content):
         print 'Success - An article was created in the helpcenter ' 
         print new_article
         # @TODO - update_git_article
-        update_git_article(new_article)
+        update_git_article(new_article, file_path)
     else:
         print 'Error - Unable to create a new article in the helpcenter'
 
@@ -100,17 +100,37 @@ def update_article(metadata, content):
 
 def update_git_article(article):
     """
-
-    Returns:
-      bool: The return value. True for success, False otherwise.
-    """
     # Check if ZD_ID exists
     # if not, append it to the front matter
     # if so set it to the new ZD_ID from create_article
     # Create a new commit on the PR branch
     # Merge the new commit to master \
     # (This could happen as part of the GH merge && check for conflicts?)
-    return
+
+    Returns:
+      bool: The return value. True for success, False otherwise.
+    """
+    #file_path='tests/fixtures/article_without_id.md'
+    new_id = article['article']['id']
+    regex = ("s/^id:$/id:%s/" % new_id)
+    # Simple command
+    replace_id_command = ['sed', '-i', '', '-e', (regex), file_path]
+    subprocess.Popen(replace_id_command).communicate(input=None)
+
+    # Check the status of the changes
+    git_status_command = ['git', 'status']
+    subprocess.Popen(git_status_command).communicate(input=None)
+
+    # Check the status of the changes
+    git_status_command = ['git', 'add', '.']
+    subprocess.Popen(git_status_command).communicate(input=None)
+
+    # Commit the changes
+    git_commit_command = ['git', 'commit', '-m', 'Committing changes - [ci skip]']
+    subprocess.Popen(git_commit_command).communicate(input=None)
+
+    return False
+
 
 def git_diff(branch1, branch2):
     """
@@ -188,7 +208,7 @@ def zd_request(u, req_data=None, method='GET', ):
     # print data
     return data
 
-def process_article(metadata, content):
+def process_article(metadata, content, file_path):
     """
       Args:
       param2 (str): The second parameter.
@@ -210,7 +230,7 @@ def process_article(metadata, content):
             update_article(metadata, content)
         else:
             print 'NO ID FOR YOU -> process_article()'
-            create_article(metadata, content)
+            create_article(metadata, content, file_path)
 
 def main():
     """
@@ -240,7 +260,7 @@ def main():
                 print 'This file does not exist in the current branch - has title'
                 pass
 
-            process_article(metadata, content)
+            process_article(metadata, content, c)
         else:
             print '---> ' + c + ' - is not markdown: Skipping'
 
