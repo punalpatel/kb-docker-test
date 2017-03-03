@@ -10,5 +10,5 @@ before_install:
 - docker images
 
 script:
-- docker run -it pivotal-gss/kb-docker
+- docker run -it pivotalsupport/kb-docker
 - docker ps -a
