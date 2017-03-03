@@ -116,19 +116,39 @@ def update_git_article(article, file_path):
     # Simple command
     replace_id_command = ['sed', '-i', '', '-e', (regex), file_path]
     subprocess.Popen(replace_id_command).communicate(input=None)
+    
+    # Check the status of the changes
+    git_config_email_command = ['git', 'config', '--global', 'user.email', 'travis@travis-ci.org']
+    subprocess.Popen(git_config_email_command).communicate(input=None)
+ 
+    # Check the status of the changes
+    git_config_name_command = ['git', 'config', '--global', 'user.name', 'Travis CI']
+    subprocess.Popen(git_config_name_command).communicate(input=None)
+ 
+    # Check the status of the changes
+    git_remote_command = ['git', 'remote', 'origin-kbs', 'https://github.com/pivotal-gss/kb-docker.git', '>', '/dev/null', '2>&1']
+    subprocess.Popen(git_remote_command).communicate(input=None)
+ 
+    # Check the status of the changes
+    git_push_command = ['git', 'push', '--quiet', '--set-upstream', 'origin-kbs', 'master']
+    subprocess.Popen(git_push_command).communicate(input=None)
+ 
+    # Check the status of the changes
+    git_checkout_command = ['git', 'checkout', '-b', 'master']
+    subprocess.Popen(git_checkout_command).communicate(input=None)
 
     # Check the status of the changes
     git_status_command = ['git', 'status']
     subprocess.Popen(git_status_command).communicate(input=None)
 
     # Check the status of the changes
-    git_status_command = ['git', 'add', '.']
-    subprocess.Popen(git_status_command).communicate(input=None)
+    git_add_command = ['git', 'add', '.']
+    subprocess.Popen(git_add_command).communicate(input=None)
 
     # Commit the changes
-    git_commit_command = ['git', 'commit', '-m', 'Committing changes - [ci skip]']
+    git_commit_command = ['git', 'commit', '-m', 'Committing changes $TRAVIS_BUILD_NUMBER - [ci skip] ']
     subprocess.Popen(git_commit_command).communicate(input=None)
-
+    
     return False
 
 
