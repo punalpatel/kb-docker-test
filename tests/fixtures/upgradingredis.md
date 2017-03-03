@@ -1,4 +1,5 @@
 template: break-fix
+id:
 locale: en-us
 # Upgrading Redis from 1.6.0 - 1.6.3 to 1.7.x Fails – All Help & Support
 
