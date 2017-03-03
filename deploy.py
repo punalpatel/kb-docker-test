@@ -98,7 +98,7 @@ def update_article(metadata, content):
     print "Return an instance of the updated_article -> update_article()"
     return hc_article
 
-def update_git_article(article):
+def update_git_article(article, file_path):
     """
     # Check if ZD_ID exists
     # if not, append it to the front matter
