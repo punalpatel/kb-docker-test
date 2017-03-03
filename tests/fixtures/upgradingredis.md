@@ -28,7 +28,5 @@ Upgrading Redis from 1.6.x (where x < 4) to 1.7.x fails and results in the follo
 
 Redis' process-destroyer job fails to gracefully shutdown because of an unhandled exit-code on the CF-Redis-Broker VM. 
 
-**Resolution****  
-**
-
+**Resolution**  
 Re-attempt an upgrade with no changes (click "Apply changes"). The second attempt should succeed. This issue is fixed in 1.6.4.
