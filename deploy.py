@@ -58,7 +58,7 @@ def create_article(metadata, content, file_path):
         print 'Success - An article was created in the helpcenter ' 
         print new_article
         # @TODO - update_git_article
-        #update_git_article(new_article, file_path)
+        update_git_article(new_article, file_path)
     else:
         print 'Error - Unable to create a new article in the helpcenter'
 
@@ -111,6 +111,7 @@ def update_git_article(article, file_path):
       bool: The return value. True for success, False otherwise.
     """
     #file_path='tests/fixtures/article_without_id.md'
+    print "File path variable is " + file_path
     new_id = article['article']['id']
     regex = ("s/^id:$/id:%s/" % new_id)
     # Simple command
