@@ -13,7 +13,7 @@ echo $var
 
 for filename in $var; do
 	echo $filename
-	if $filename; then
+	if [ -f $filename ]; then
 		sudo python $KB_DOCKER/src/KBFrontmatter.py $filename
 	fi
 done
@@ -21,7 +21,7 @@ done
 # @TODO Add a local variable for non-travis testing
  if [ "$TRAVIS_BRANCH" == "prod" ]; then
 	for filename in $var; do
-		if $filename; then
+		if [ -f $filename ]; then
 			sudo python $KB_DOCKER/deploy.py $filename
 		fi
 	done
