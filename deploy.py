@@ -58,7 +58,7 @@ def create_article(metadata, content, file_path):
         print 'Success - An article was created in the helpcenter ' 
         print new_article
         # @TODO - update_git_article
-        update_git_article(new_article, file_path)
+        #update_git_article(new_article, file_path)
     else:
         print 'Error - Unable to create a new article in the helpcenter'
 
