@@ -15,6 +15,8 @@ for filename in $var; do
 	echo $filename
 	if $filename:
 		python $KB_DOCKER/src/KBFrontmatter.py $filename
+	else:
+		continue
 done
 
 # @TODO Add a local variable for non-travis testing
@@ -22,5 +24,7 @@ done
 	for filename in $var; do
 		if $filename:
 			python $KB_DOCKER/deploy.py $filename
+		else:
+			continue
 	done
  fi
