@@ -14,7 +14,7 @@ echo $var
 for filename in $var; do
 	echo $filename
 	if $filename; then
-		python $KB_DOCKER/src/KBFrontmatter.py $filename
+		sudo python $KB_DOCKER/src/KBFrontmatter.py $filename
 	fi
 done
 
@@ -22,7 +22,7 @@ done
  if [ "$TRAVIS_BRANCH" == "prod" ]; then
 	for filename in $var; do
 		if $filename; then
-			python $KB_DOCKER/deploy.py $filename
+			sudo python $KB_DOCKER/deploy.py $filename
 		fi
 	done
  fi
