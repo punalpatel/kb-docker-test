@@ -12,8 +12,8 @@ commit_kbs() {
 }
 
 upload_files() {
-  git remote add master https://@github.com/pivotal-gss/kb-docker.git > /dev/null 2>&1
-  git push --quiet --set-upstream master kbs 
+  git remote add origin https://@github.com/pivotal-gss/kb-docker.git > /dev/null 2>&1
+  git push --quiet --set-upstream origin kbs 
 }
 
 setup_git
