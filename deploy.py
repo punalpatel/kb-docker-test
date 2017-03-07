@@ -130,15 +130,15 @@ def update_git_article(article, file_path):
     subprocess.Popen(git_config_name_command).communicate(input=None)
     
     # Check the status of the changes
-    git_remote_command = ['git', 'remote', 'add', 'origin-kbs', 'https://github.com/pivotal-gss/kb-docker.git']
+    git_remote_command = ['git', 'remote', 'add', 'origin', ' -t kbs', 'https://github.com/pivotal-gss/kb-docker.git']
     subprocess.Popen(git_remote_command).communicate(input=None)
 			
     # Check the status of the changes				
-    git_push_command = ['git', 'push', '--quiet', '--set-upstream', 'origin-kbs', 'master']
+    git_push_command = ['git', 'push', '--quiet', '--set-upstream', 'origin', 'kbs']
     subprocess.Popen(git_push_command).communicate(input=None)
 						
     # Check the status of the changes
-    git_checkout_command = ['git', 'checkout', '-b', 'master']
+    git_checkout_command = ['git', 'checkout', '-b', 'kbs']
     subprocess.Popen(git_checkout_command).communicate(input=None)
 
     # Check the status of the changes
@@ -153,7 +153,7 @@ def update_git_article(article, file_path):
     git_commit_command = ['git', 'commit', '-m', 'Committing changes $TRAVIS_BUILD_NUMBER - [ci skip] ']
     subprocess.Popen(git_commit_command).communicate(input=None)
 
-    return False
+    return True
 
 
 def git_diff(branch1, branch2):
