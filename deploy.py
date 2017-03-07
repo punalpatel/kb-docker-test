@@ -58,7 +58,8 @@ def create_article(metadata, content, file_path):
         print 'Success - An article was created in the helpcenter ' 
         print new_article
         # @TODO - update_git_article
-        update_git_article(new_article, file_path)
+        #update_git_article(new_article, file_path)
+        setenv_new_article(new_article, file_path)
     else:
         print 'Error - Unable to create a new article in the helpcenter'
 
@@ -97,6 +98,15 @@ def update_article(metadata, content):
     # @TODO should we create one anyway? Discuss?
     print "Return an instance of the updated_article -> update_article()"
     return hc_article
+
+def setenv_new_article(article, file_path):
+    """
+    # Set new article id as environment variable NEW_ARTICLE_ID
+    Returns:
+      bool: The return value. True for success, False otherwise.
+    """
+    os.environ["NEW_ARTICLE_ID"]: = article['article']['id']
+    return True
 
 def update_git_article(article, file_path):
     """

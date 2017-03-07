@@ -1,15 +1,16 @@
 sudo: required
-
 language: python
-
 services:
-  - docker
-
+- docker
 before_install:
-- docker build --build-arg travis_branch=${TRAVIS_BRANCH} --build-arg travis_pull_request=${TRAVIS_PULL_REQUEST} --build-arg kb_user=${KB_USER} --build-arg kb_password=${KB_PASSWORD} --build-arg kb_target_url=${KB_TARGET_URL} -t pivotal-gss/kb-docker .
+- docker build --build-arg travis_branch=${TRAVIS_BRANCH} --build-arg travis_pull_request=${TRAVIS_PULL_REQUEST}
+  --build-arg kb_user=${KB_USER} --build-arg kb_password=${KB_PASSWORD} --build-arg
+  kb_target_url=${KB_TARGET_URL} -t pivotal-gss/kb-docker .
 - docker images
-
 script:
-#- docker run -it pivotalsupport/kb-docker
-- docker run -it -v $PWD:/pcf-kbs -e TRAVIS_BRANCH="prod" -e KB_TARGET_URL=$KB_TARGET_URL -e KB_USER=$KB_USER -e KB_PASSWORD=$KB_PASSWORD pivotal-gss/kb-docker /bin/sh /kb-docker/script.sh
+- docker run -it -v $PWD:/pcf-kbs -e TRAVIS_BRANCH="prod" -e KB_TARGET_URL=$KB_TARGET_URL
+  -e KB_USER=$KB_USER -e KB_PASSWORD=$KB_PASSWORD pivotal-gss/kb-docker /bin/sh /kb-docker/script.sh
 - docker ps -a
+env:
+  global:
+    secure: E37rT9CBla+tJl4N/cpKBkAmsEF+/+cAbHSEQeZs/EnE4l/CzI90CiiaZFGOk9YRElhb1xuAJtkxqK/OaIIqAYQwhLzk0IS7XkGmeYB/+X0xLMs124VhGFFaY5G5lC0p1qyCgPJut19nEWXoCST0pA44ByqfIcLipHwMLH1oNpJhtrHkHwyFLgUh4aErsSFj+NqJ4LE13HKpM3WImA8bqDt1hetJO9QEq3syjtFiLau6zJAivUY+Y75lmiiznYlcBPyJpKevtc5wqizRAVElvhdMMZeWQRY/VcZZJIU8T5Y2APeoO3lqGAtCcNaBmXcfOafvSx/jcxo9SSxv6D5eYLLP9fMR2OkiVG16xOPXos9NArP6PNCZKw1hboKtr96rt7NGuOz5AhCDwLE7psERTXX7M2JEp2GP4Qu7WXT3pW5AGMh4hhWPKHDuD3RpBThIr1Q56DFTnRns07OBuZGbpZjhBqx9027tMi7Q4RNNXeUNxYAj9gjnxk/9KVC/VL2yBoX4XEd5eVhT5ngcaPV/lofy7zfGf8lPbK0zshhOxZAnxo34ODmw7jBQEDvfRwvp4GwlRRgEVceHiCvhs2Dwsy9W7f6VV1MT6iolfTcCFdDR3PfaEszc2T2Jom47vGsloFs2ZWPqOV5EU0y8HwYQ0Z0i6DfpdHNJbxuxRvTG+Fs=
