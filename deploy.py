@@ -114,12 +114,7 @@ def update_git_article(article, file_path):
     print "File path variable is " + file_path
     new_id = article['article']['id']
     regex = ("s/^id:$/id:%s/" % new_id)
-    commands = '''
-    pwd
-    ls
-    pwd
-    ls tests/fixtures/testKBonMar6.md
-    '''
+    commands = "\n" + "sed -i -e " + regex + file_path + "\n"
     #Commands pwd ls
     process = subprocess.Popen('/bin/bash', stdin=subprocess.PIPE, stdout=subprocess.PIPE)
     out, err = process.communicate(commands.encode('utf-8'))
