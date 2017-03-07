@@ -116,43 +116,26 @@ def update_git_article(article, file_path):
     regex = ("s/id:$/id:%s/" % new_id)
     commands = "\n" + "sed -i -e " + regex + " " + file_path + "\n"
     #Command sed
+    
     process = subprocess.Popen('/bin/bash', stdin=subprocess.PIPE, stdout=subprocess.PIPE)
     out, err = process.communicate(commands.encode('utf-8'))
     print(out.decode('utf-8'))
     
-    # Check the status of the changes
-    git_config_email_command = ['git', 'config', '--global', 'user.email', 'travis@travis-ci.org']
-    subprocess.Popen(git_config_email_command).communicate(input=None)
- 
-    # Check the status of the changes
-    git_config_name_command = ['git', 'config', '--global', 'user.name', 'Travis CI']
-    subprocess.Popen(git_config_name_command).communicate(input=None)
- 
-    # Check the status of the changes
-    git_remote_command = ['git', 'remote', 'add', 'origin-kbs', 'https://github.com/pivotal-gss/kb-docker.git']
-    subprocess.Popen(git_remote_command).communicate(input=None)
- 
-    # Check the status of the changes
-    git_push_command = ['git', 'push', '--quiet', '--set-upstream', 'origin-kbs', 'master']
-    subprocess.Popen(git_push_command).communicate(input=None)
- 
-    # Check the status of the changes
-    git_checkout_command = ['git', 'checkout', '-b', 'master']
-    subprocess.Popen(git_checkout_command).communicate(input=None)
-
-    # Check the status of the changes
-    git_status_command = ['git', 'status']
-    subprocess.Popen(git_status_command).communicate(input=None)
-
-    # Check the status of the changes
-    git_add_command = ['git', 'add', '.']
-    subprocess.Popen(git_add_command).communicate(input=None)
-
-    # Commit the changes
-    git_commit_command = ['git', 'commit', '-m', 'Committing changes $TRAVIS_BUILD_NUMBER - [ci skip] ']
-    subprocess.Popen(git_commit_command).communicate(input=None)
+    git_commands = '''
+    git config —global user.email ‘travis@travis-ci.org’
+    git config —global user.name ’Travis CI’
+    git remote add origin-kbs https://github.com/pivotal-gss/kb-docker.git
+    git push —quiet —set-upstream origin-kbs master
+    git checkout -b master
+    git status
+    git add .
+    git commit -m ‘Committing changes’
+    ‘’’
+    git_process = subprocess.Popen('/bin/bash', stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+    out, err = git_process.communicate(commands.encode('utf-8'))
+    print(out.decode('utf-8'))
     
-    return True
+    return False
 
 
 def git_diff(branch1, branch2):
