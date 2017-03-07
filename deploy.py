@@ -121,11 +121,11 @@ def update_git_article(article, file_path):
     print(out.decode('utf-8'))
     
     # Check the status of the changes
-    git_config_email_command = ['git', 'config', '--global', 'user.email', 'punal.patel@gmail.com']
+    git_config_email_command = ['git', 'config', '--global', 'user.email', 'travis@travis-ci.org']
     subprocess.Popen(git_config_email_command).communicate(input=None)
  
     # Check the status of the changes
-    git_config_name_command = ['git', 'config', '--global', 'user.name', 'Punal Patel']
+    git_config_name_command = ['git', 'config', '--global', 'user.name', 'Travis CI']
     subprocess.Popen(git_config_name_command).communicate(input=None)
  
     # Check the status of the changes
@@ -152,7 +152,7 @@ def update_git_article(article, file_path):
     git_commit_command = ['git', 'commit', '-m', 'Committing changes $TRAVIS_BUILD_NUMBER - [ci skip] ']
     subprocess.Popen(git_commit_command).communicate(input=None)
     
-    return False
+    return True
 
 
 def git_diff(branch1, branch2):
