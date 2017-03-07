@@ -2,7 +2,7 @@
 
 setup_git() {
   git config --global user.email "punal.patel@gmail.com"
-  git config --global user.name "Travis CI"
+  git config --global user.name "Punal Patel"
 }
 
 commit_kbs() {
