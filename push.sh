@@ -12,7 +12,7 @@ commit_kbs() {
 }
 
 push_files() {
-  git remote add origin https://@github.com/pivotal-gss/kb-docker.git > /dev/null 2>&1
+  git remote add origin https://${GH_TOKEN}@github.com/pivotal-gss/kb-docker.git > /dev/null 2>&1
   git push --quiet --set-upstream origin kbs 
 }
 
