@@ -115,14 +115,10 @@ def update_git_article(article, file_path):
     new_id = article['article']['id']
     regex = ("s/id:$/id:%s/" % new_id)
     commands = "\n" + "sed -i -e " + regex + " " + file_path + "\n"
-    #Commands pwd ls
+    #Command sed
     process = subprocess.Popen('/bin/bash', stdin=subprocess.PIPE, stdout=subprocess.PIPE)
     out, err = process.communicate(commands.encode('utf-8'))
     print(out.decode('utf-8'))
-
-    # Simple command
-    replace_id_command = ['sed', '-i', '', '-e', (regex), file_path]
-    subprocess.Popen(replace_id_command).communicate(input=None)
     
     # Check the status of the changes
     git_config_email_command = ['git', 'config', '--global', 'user.email', 'travis@travis-ci.org']
