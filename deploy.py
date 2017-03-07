@@ -119,8 +119,9 @@ def update_git_article(article, file_path):
     ls
     '''
     #Commands pwd ls
-    subprocess.Popen('/bin/bash', stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+    process = subprocess.Popen('/bin/bash', stdin=subprocess.PIPE, stdout=subprocess.PIPE)
     out, err = process.communicate(commands.encode('utf-8'))
+    print(out.decode('utf-8'))
 
     # Simple command
     replace_id_command = ['sed', '-i', '', '-e', (regex), file_path]
