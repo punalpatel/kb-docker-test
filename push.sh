@@ -6,14 +6,14 @@ setup_git() {
 }
 
 commit_kbs() {
-  git checkout -b prod
+  git checkout -b kbs
   git add . 
   git commit --message "Travis build: $TRAVIS_BUILD_NUMBER"
 }
 
 upload_files() {
   git remote add prod https://${GH_TOKEN}@github.com/pivotal-gss/kb-docker.git > /dev/null 2>&1
-  git push --quiet --set-upstream master prod 
+  git push --quiet --set-upstream master kbs 
 }
 
 setup_git
