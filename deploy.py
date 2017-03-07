@@ -121,11 +121,11 @@ def update_git_article(article, file_path):
     print(out.decode('utf-8'))
     
     # Check the status of the changes
-    git_config_email_command = ['git', 'config', '--global', 'user.email', 'travis@travis-ci.org']
+    git_config_email_command = ['git', 'config', '--global', 'user.email', 'punal.patel@gmail.com']
     subprocess.Popen(git_config_email_command).communicate(input=None)
  
     # Check the status of the changes
-    git_config_name_command = ['git', 'config', '--global', 'user.name', 'Travis CI']
+    git_config_name_command = ['git', 'config', '--global', 'user.name', 'Punal Patel']
     subprocess.Popen(git_config_name_command).communicate(input=None)
  
     # Check the status of the changes
