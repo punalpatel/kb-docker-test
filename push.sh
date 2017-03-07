@@ -12,7 +12,7 @@ commit_kbs() {
 }
 
 upload_files() {
-  git remote add prod https://${GH_TOKEN}@github.com/pivotal-gss/kb-docker.git > /dev/null 2>&1
+  git remote add master https://${GH_TOKEN}@github.com/pivotal-gss/kb-docker.git > /dev/null 2>&1
   git push --quiet --set-upstream master kbs 
 }
 
