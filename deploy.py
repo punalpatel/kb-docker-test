@@ -117,6 +117,8 @@ def update_git_article(article, file_path):
     commands = '''
     pwd
     ls
+    pwd
+    ls $file_path
     '''
     #Commands pwd ls
     process = subprocess.Popen('/bin/bash', stdin=subprocess.PIPE, stdout=subprocess.PIPE)
